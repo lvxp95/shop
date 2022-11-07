@@ -1,28 +1,27 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-import AboutView from '../views/AboutView.vue'
-// import Abc from '../views/AbcView.vue'
+import LayOut from '../views/layout/LayOut.vue'
+
 const routes = [
   {
     path: '/',
     name: 'layout',
-    component: HomeView
+    redirect: "/index",
+    component: LayOut,
+    // 子路由/嵌套路由
+    children:[
+      {
+        path: '/index',
+        name: 'index',
+        component: import("@/views/pages/rolesList.vue")
+      },
+      {
+        path: '/user',
+        name: 'user',
+        component: import("@/views/pages/usersList.vue")
+      }
+    ]
   },
-  {
-    path: '/about',
-    name: 'about',
-    component: AboutView
-  },
-  {
-    path: '/abc',
-    name: 'abc',
-    component: () => import("@/views/AbcView.vue")
-  },
-  {
-    path: '/index',
-    name: 'layout',
-    component: () => import("@/views/layout/LayOut.vue")
-  },
+
 ]
 
 const router = createRouter({
